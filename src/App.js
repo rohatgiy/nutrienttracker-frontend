@@ -1,13 +1,20 @@
-import React from 'react';
-import './App.css';
+import React, {Component} from 'react'
 
-function App ()
+import './App.css'
+
+import Navbar from "./components/Navbar"
+
+
+class App extends Component
 {
-  return (
-    <div className="App">
-      <h1>Nutrient Tracker</h1>
+  render ()
+  {
+    return (
+    <div>
+      <Navbar />
     </div>
-  )
+    )
+  }
 }
 
 
