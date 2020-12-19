@@ -8,6 +8,8 @@ import {
 import History from "./History"
 import Home from "./Home"
 import Add from "./Add"
+import Dashboard from "./Dashboard"
+import Register from "./Register"
 
 function Navbar()
 {
@@ -25,10 +27,25 @@ function Navbar()
                     <a class="nav-link"><Link class="nav-link" to="/add">Add</Link></a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link"><Link class="nav-link" to="/dashboard">Dashboard</Link></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link"><Link class="nav-link" to="/history">History</Link></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link"><Link class="nav-link" to="/register">Register</Link></a>
+                </li>
+
                 </ul>
             </div>
+
+            <form class="form-inline my-2 my-lg-0">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link">Logout</a>
+                </li>
+              </ul>
+            </form>
         </nav>
 
         <Switch>
@@ -37,6 +54,12 @@ function Navbar()
           </Route>
           <Route path="/add">
             <Add />
+          </Route>
+          <Route path="/dashboard">
+            <Dashboard />
+          </Route>
+          <Route path="/register">
+            <Register />
           </Route>
           <Route path="/">
             <Home name="Yash"/>

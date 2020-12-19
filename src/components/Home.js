@@ -1,17 +1,16 @@
 import React, {Component} from "react"
 
-class Home extends Component {
+class Home extends Component
+{
     constructor(props)
     {
         super(props);
     }
 
-    render ()
+    render()
     {
         return (
-            <div>
-                <p>Hello, {this.props.name}!</p>
-            </div>
+        <p>Hello, {this.props.name}!</p>
         )
     }
 }
