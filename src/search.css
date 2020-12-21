@@ -1,0 +1,4 @@
+.searchItem:hover{
+    background-color: lightgray;
+    text-decoration: underline;
+}

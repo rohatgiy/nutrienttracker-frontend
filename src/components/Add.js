@@ -1,4 +1,6 @@
 import React, {Component} from "react"
+import Search from "./Search"
+import { foodData } from "../foods_data"
 
 class Add extends Component
 {
@@ -6,7 +8,12 @@ class Add extends Component
     {
         return(
             <div>
-                Add
+                <br/>
+               <div className="form-group col-md-4 offset-md-4">
+                   <h5>Add a food:</h5>
+                </div>
+                <Search data={foodData}/>
+                
             </div>
         )
     }

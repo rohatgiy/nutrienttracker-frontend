@@ -10,47 +10,54 @@ import Home from "./Home"
 import Add from "./Add"
 import Dashboard from "./Dashboard"
 import Register from "./Register"
+import Login from "./Login"
+import Account from "./Account"
 
 function Navbar()
 {
     return (
         <Router>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand"><Link class="navbar-brand" to="/">Nutrient Tracker</Link></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <Link className="navbar-brand" to="/">Nutrient Tracker</Link>
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link"><Link class="nav-link" to="/add">Add</Link></a>
+            <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul className="navbar-nav mr-auto">
+                <li className="nav-item">
+                    <Link className="nav-link" to="/add">Add</Link>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link"><Link class="nav-link" to="/dashboard">Dashboard</Link></a>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/dashboard">Dashboard</Link>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link"><Link class="nav-link" to="/history">History</Link></a>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/history">History</Link>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link"><Link class="nav-link" to="/register">Register</Link></a>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/register">Register</Link>
                 </li>
-
+                <li className="nav-item">
+                    <Link className="nav-link" to="/login">Login</Link>
+                </li>
+                </ul>
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/editacc">Account</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to="/editacc">Logout</Link>
+                  </li>
                 </ul>
             </div>
-
-            <form class="form-inline my-2 my-lg-0">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                  <a class="nav-link">Logout</a>
-                </li>
-              </ul>
-            </form>
         </nav>
 
         <Switch>
           <Route path="/history">
             <History />
+          </Route>
+          <Route path="/editacc">
+            <Account />
           </Route>
           <Route path="/add">
             <Add />
@@ -60,6 +67,9 @@ function Navbar()
           </Route>
           <Route path="/register">
             <Register />
+          </Route>
+          <Route path="/login">
+            <Login />
           </Route>
           <Route path="/">
             <Home name="Yash"/>
