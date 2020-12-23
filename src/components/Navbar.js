@@ -5,6 +5,7 @@ import {
     Route,
     Link
 } from "react-router-dom"
+import {LoginContext} from "./LoginContext"
 import History from "./History"
 import Home from "./Home"
 import Add from "./Add"
@@ -24,31 +25,48 @@ function Navbar()
             </button>
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                    <Link className="nav-link" to="/add">Add</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/dashboard">Dashboard</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/history">History</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/register">Register</Link>
-                </li>
-                <li className="nav-item">
-                    <Link className="nav-link" to="/login">Login</Link>
-                </li>
-                </ul>
-                <ul className="navbar-nav ml-auto">
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/editacc">Account</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/editacc">Logout</Link>
-                  </li>
-                </ul>
+                
+            
+              
+              <LoginContext.Consumer>
+                {
+                  context => 
+                  {
+                    return context.loggedIn ? (
+                    <div>
+                      <ul className="navbar-nav mr-auto">
+                        <li className="nav-item">
+                          <Link className="nav-link" to="/add">Add</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/history">History</Link>
+                        </li>
+                      </ul>
+                      <ul className="navbar-nav ml-auto">
+                      <li className="nav-item">
+                        <Link className="nav-link" to="/editacc">Account</Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link className="nav-link" to="/editacc">Logout</Link>
+                      </li>
+                      </ul>
+                    </div>
+                    ) : (
+                      <ul className="navbar-nav mr-auto">
+                      <li className="nav-item">
+                        <Link className="nav-link" to="/register">Register</Link>
+                      </li>
+                      <li className="nav-item">
+                          <Link className="nav-link" to="/login">Login</Link>
+                      </li>
+                      </ul>
+                    )
+                  }
+                }
+                </LoginContext.Consumer> 
             </div>
         </nav>
 
@@ -68,9 +86,7 @@ function Navbar()
           <Route path="/register">
             <Register />
           </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
+          <Route path="/login" component={Login}/>
           <Route path="/">
             <Home name="Yash"/>
           </Route>

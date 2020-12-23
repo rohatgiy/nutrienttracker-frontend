@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import Search from "./Search"
 import { foodData } from "../foods_data"
+import {withRouter} from "react-router-dom"
 
 class Add extends Component
 {
@@ -19,4 +20,4 @@ class Add extends Component
     }
 }
 
-export default Add
+export default withRouter(Add)
