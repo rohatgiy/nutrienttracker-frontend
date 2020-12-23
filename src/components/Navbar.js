@@ -33,7 +33,6 @@ function Navbar()
                   context => 
                   {
                     return context.loggedIn ? (
-                    <div>
                       <ul className="navbar-nav mr-auto">
                         <li className="nav-item">
                           <Link className="nav-link" to="/add">Add</Link>
@@ -45,15 +44,6 @@ function Navbar()
                             <Link className="nav-link" to="/history">History</Link>
                         </li>
                       </ul>
-                      <ul className="navbar-nav ml-auto">
-                      <li className="nav-item">
-                        <Link className="nav-link" to="/editacc">Account</Link>
-                      </li>
-                      <li className="nav-item">
-                        <Link className="nav-link" to="/editacc">Logout</Link>
-                      </li>
-                      </ul>
-                    </div>
                     ) : (
                       <ul className="navbar-nav mr-auto">
                       <li className="nav-item">
@@ -67,6 +57,22 @@ function Navbar()
                   }
                 }
                 </LoginContext.Consumer> 
+                <LoginContext.Consumer>
+                  {
+                    context => {
+                      return context.loggedIn ? (
+                        <ul className="navbar-nav ml-auto">
+                        <li className="nav-item">
+                          <Link className="nav-link" to="/editacc">Account</Link>
+                        </li>
+                        <li className="nav-item">
+                          <Link className="nav-link" to="/editacc">Logout</Link>
+                        </li>
+                      </ul>
+                      ) : null
+                    }
+                  }
+                </LoginContext.Consumer>
             </div>
         </nav>
 

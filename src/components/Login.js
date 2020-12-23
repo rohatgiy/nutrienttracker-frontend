@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import {withRouter} from "react-router-dom"
+import { LoginContext } from "./LoginContext"
 
 class Login extends Component
 {
@@ -23,6 +24,8 @@ class Login extends Component
     handleSubmit(e)
     {
         e.preventDefault();
+        const {toggleLogin} = this.context
+        
         const data = this.state;
         const opts = {
             method: "POST",
@@ -42,6 +45,7 @@ class Login extends Component
             }
             else
             {
+                toggleLogin(true)
                 this.props.history.push("/add")
             } 
     })
@@ -78,4 +82,5 @@ class Login extends Component
     }
 }
 
+Login.contextType = LoginContext
 export default withRouter(Login)

@@ -8,10 +8,17 @@ import Navbar from "./components/Navbar"
 
 class App extends Component
 {
+  toggleLogin = loggedIn =>
+  {
+    this.setState({loggedIn: loggedIn})
+  }
   constructor()
   {
     super()
-    this.state = LoginContext
+    this.state = {
+      loggedIn: false,
+      toggleLogin: this.toggleLogin
+    }
   }
   render ()
   {
