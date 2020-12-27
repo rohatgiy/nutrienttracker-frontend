@@ -44,6 +44,7 @@ class Account extends Component
             body: JSON.stringify(data),
             credentials: "include"
         })
+        this.setState({smallClass: "form-text text-success", message:"Updated!"})
     } 
     
     handleChange(e)
@@ -87,6 +88,7 @@ class Account extends Component
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
+                        <small className={this.state.smallClass}>{this.state.message}</small>
                     </div>
                     </div>
                     <div className="offset-md-4 col-md-4">

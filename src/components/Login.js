@@ -16,6 +16,16 @@ class Login extends Component
         this.handleSubmit = this.handleSubmit.bind(this)
     }
 
+    componentDidMount()
+    {
+        const {loggedIn} = this.context
+
+        if (loggedIn)
+        {
+            this.props.history.push("/")
+        }
+    }
+
     handleChange(e)
     {
         this.setState({ [e.target.name]: e.target.value })
@@ -57,9 +67,11 @@ class Login extends Component
         return(
             <div id="content">
                <br/>
-               <div>
-                   <h5 className="col-md-4 offset-md-4">Login:</h5>
+               <div className="col-md-4 offset-md-4">
+                   <h5>Login:</h5>
+                   <small>Don't have an account? <a href="/register">Register</a> here.</small>
                 </div>
+                <br />
                <form>
                    <div>
                     <div className="form-group col-md-4 offset-md-4">

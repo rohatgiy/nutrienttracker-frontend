@@ -42,7 +42,7 @@ export default class Search extends React.Component {
     .then(data => {
       if (!data.success)
       {
-        this.setState({smallClass: "form-text text-danger", added: data.message})
+        this.setState({smallClass: "form-text text-danger", message: data.message})
       }
       else
       {
@@ -50,7 +50,7 @@ export default class Search extends React.Component {
         this.setState(
         {
           smallClass: "form-text text-success", 
-          added: "Added!",
+          message: "Added!",
           searchingFor: "",
           serving_sizes: [],
           food_code: null,
@@ -150,7 +150,7 @@ export default class Search extends React.Component {
           <select className="custom-select" id="serving-size" onChange={this.onServingSelect}>
               {this.state.serving_sizes.map((item, index) => <option value={index} key={index}>{item.serving_description}</option>)}
           </select>
-          <small className={this.state.smallClass}>{this.state.added}</small>
+          <small className={this.state.smallClass}>{this.state.message}</small>
         </div>
         <div className="offset-md-4 col-md-4">
             <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Add</button>

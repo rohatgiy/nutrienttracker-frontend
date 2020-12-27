@@ -1,11 +1,7 @@
 import React, {Component} from "react"
 import {LoginContext} from "./LoginContext"
 import {withRouter} from "react-router-dom"
-import {
-    RadialBarChart, RadialBar, PolarAngleAxis
-} from 'recharts';
-import ReactTooltip from "react-tooltip"
-import FoodItem from "./FoodItem"
+import Entry from "./Entry"
 
 var empty = true;
 
@@ -54,7 +50,10 @@ class Dashboard extends Component
                         [{
                             fill: '#5cb85c',
                             dec: frac,
-                            name: data.entry.nutrients[i].nutrient
+                            name: data.entry.nutrients[i].nutrient,
+                            num: data.entry.nutrients[i].amount.toFixed(3),
+                            den: den,
+                            unit: data.entry.nutrients[i].unit
                         }]
                     )
                 }
@@ -64,7 +63,10 @@ class Dashboard extends Component
                         [{
                             fill: '#d9534f',
                             dec: frac,
-                            name: data.entry.nutrients[i].nutrient
+                            name: data.entry.nutrients[i].nutrient,
+                            num: data.entry.nutrients[i].amount.toFixed(3),
+                            den: den,
+                            unit: data.entry.nutrients[i].unit
                         }]
                     )
                 }
@@ -124,7 +126,10 @@ class Dashboard extends Component
                         [{
                             fill: '#5cb85c',
                             dec: frac,
-                            name: data.entry.nutrients[i].nutrient
+                            name: data.entry.nutrients[i].nutrient,
+                            num: data.entry.nutrients[i].amount.toFixed(3),
+                            den: den,
+                            unit: data.entry.nutrients[i].unit
                         }]
                     )
                 }
@@ -134,7 +139,10 @@ class Dashboard extends Component
                         [{
                             fill: '#d9534f',
                             dec: frac,
-                            name: data.entry.nutrients[i].nutrient
+                            name: data.entry.nutrients[i].nutrient,
+                            num: data.entry.nutrients[i].amount.toFixed(3),
+                            den: den,
+                            unit: data.entry.nutrients[i].unit
                         }]
                     )
                 }
@@ -150,57 +158,7 @@ class Dashboard extends Component
 
     render ()
     {
-        return !empty ? (
-            <div>
-                <div className="offset-md-4 col-md-4">
-                    <br />
-                    <h2>Today, you ate:</h2>   
-                </div>
-                <br/>
-                <div className="card offset-md-2 col-md-8">
-                    <div className="card-body">
-                        <h4 className="card-title">{this.state.entry.date.toString().substring(0, 10)}</h4>
-                        <div className="row">
-                            <div className="col-4">
-                                <h5 className="text-muted">Foods:</h5>
-                                {this.state.entry.food_names.map((item, index) => <FoodItem name={item} index={index} rerenderParentCallback={this.rerenderParentCallback}/>)}
-                            </div> 
-                            <div className="col-8">
-                                <h5 className="text-muted">Nutrients:</h5>
-                                <div className="row">
-                                {this.state.data.map((item) => 
-                                {
-                                    return (
-                                    <div style={{textAlign: "center", margin: "5px", width: "100px"}}>
-                                        
-                                        <p data-tip={"" + (item[0].dec*100).toFixed(2) + "% of daily requirements"}>
-                                            <RadialBarChart width={100} height={100} cx={50} cy={50} innerRadius={30} barSize={30} data={item}>
-                                                <PolarAngleAxis type="number" domain={[0, 1]} angleAxisId={0} tick={false} />
-                                                <RadialBar background dataKey="dec" angleAxisId={0} clockWise={true}/>
-                                            </RadialBarChart>
-                                        </p>
-                                        <ReactTooltip />
-                                        <text>{item[0].name}</text>
-                                    </div>
-                                    )
-                                })}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        ) : (
-            <div>
-                <div className="offset-md-4 col-md-4">
-                    <br />
-                    <h2>Today, you ate:</h2>
-                    <br />
-                    <p>You haven't eaten anything today!</p>   
-                    <a href="/add">Click to add foods</a>
-                </div>
-            </div>
-        )
+        return <Entry date={this.state.entry.date} food_names={this.state.entry.food_names} data={this.state.data} empty={empty} rerenderParentCallback={this.rerenderParentCallback}/>
     }
 }
 
