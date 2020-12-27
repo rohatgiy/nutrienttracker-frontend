@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.searchItem:hover{
+  background-color: lightgrey;
+  text-decoration: underline;
+}
+
+.deleteButton{
+  border-radius: 0px .20rem .20rem 0 !important;
+  height:100% !important;
+  color:rgb(168, 151, 151);
+  background-color:lightgrey;
+  border:0 !important;
+  padding: 0px 10px;
+  margin:0;
+}
+
+.deleteButton:hover{
+  background-color:grey !important;
+  transition:0.2s
+}

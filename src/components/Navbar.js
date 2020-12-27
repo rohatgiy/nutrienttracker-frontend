@@ -1,9 +1,9 @@
-import React from "react"
+import React, {Component} from "react"
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
 } from "react-router-dom"
 import {LoginContext} from "./LoginContext"
 import History from "./History"
@@ -14,9 +14,22 @@ import Register from "./Register"
 import Login from "./Login"
 import Account from "./Account"
 
-function Navbar()
+class Navbar extends Component
 {
-    return (
+  constructor(props)
+  {
+    super(props)
+    this.logoutHandler = this.logoutHandler.bind(this)
+  }
+
+    logoutHandler(e)
+    {
+      const {toggleLogout} = this.context
+      toggleLogout()
+    }
+
+    render() {
+      return (
         <Router>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <Link className="navbar-brand" to="/">Nutrient Tracker</Link>
@@ -66,7 +79,7 @@ function Navbar()
                           <Link className="nav-link" to="/editacc">Account</Link>
                         </li>
                         <li className="nav-item">
-                          <Link className="nav-link" to="/editacc">Logout</Link>
+                          <Link className="nav-link" to="/" onClick={this.logoutHandler}>Logout</Link>
                         </li>
                       </ul>
                       ) : null
@@ -94,11 +107,13 @@ function Navbar()
           </Route>
           <Route path="/login" component={Login}/>
           <Route path="/">
-            <Home name="Yash"/>
+            <Home />
           </Route>
         </Switch>
         </Router>
     )
+                }
 } 
 
+Navbar.contextType = LoginContext
 export default Navbar

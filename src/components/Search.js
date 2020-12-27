@@ -1,7 +1,6 @@
 import React from 'react'
 import Autocomplete from 'react-autocomplete'
 import { List, CellMeasurer, CellMeasurerCache } from 'react-virtualized';
-import "../search.css"
 
 
 export default class Search extends React.Component {
@@ -14,17 +13,67 @@ export default class Search extends React.Component {
     this.state = {
       searchingFor: '',
       data: props.data,
-      serving_sizes: []
+      serving_sizes: [],
+      food_code: null,
+      serving_index: null,
     }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.onServingSelect = this.onServingSelect.bind(this)
   }
 
-  onSelect = (value, selection) => {
-    this.setState({searchingFor: selection.food_name, serving_sizes: selection.serving_sizes})
-    console.log(selection.serving_sizes)
+  handleSubmit(e)
+  {
+    e.preventDefault()
+    
+    fetch("http://localhost:5000/add/",
+    {
+      method: "POST",
+      headers:
+        {
+          "Content-Type": "application/json"
+        },
+      credentials: "include",
+      body: JSON.stringify({
+        food_code: this.state.food_code,
+        serving_index: this.state.serving_index
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (!data.success)
+      {
+        this.setState({smallClass: "form-text text-danger", added: data.message})
+      }
+      else
+      {
+        console.log("get here")
+        this.setState(
+        {
+          smallClass: "form-text text-success", 
+          added: "Added!",
+          searchingFor: "",
+          serving_sizes: [],
+          food_code: null,
+          serving_index: null
+        })
+      }
+    })
+
+    
+  }
+
+  onFoodSelect = (value, selection) => {
+    this.setState({searchingFor: selection.food_name, serving_sizes: selection.serving_sizes, food_code: selection.food_code})
   }
 
   renderItem = (item) => {
-    return <div className='searchItem' value={item.food_code}>{item.food_name}</div>
+    return <div className='searchItem'>{item.food_name}</div>
+  }
+
+  onServingSelect(e)
+  {
+    let serving_index = parseInt(e.target.value)
+    this.setState({serving_index: serving_index})
   }
 
   renderMenu = (items, _, autocompleteStyle) => {
@@ -93,18 +142,19 @@ export default class Search extends React.Component {
           
           getItemValue={ item => item.food_name }
           onChange={(e, value) => this.setState({searchingFor: value, serving_sizes: []})}
-          onSelect={this.onSelect}
+          onSelect={this.onFoodSelect}
         />
         </div>
         <div className="form-group col-md-4 offset-md-4">
-                        <label htmlFor="serving-size">Serving size</label>
-                        <select className="custom-select" id="serving-size">
-                          {this.state.serving_sizes.map((item) => <option>{item.serving_description}</option>)}
-                        </select>
+          <label htmlFor="serving-size">Serving size</label>
+          <select className="custom-select" id="serving-size" onChange={this.onServingSelect}>
+              {this.state.serving_sizes.map((item, index) => <option value={index} key={index}>{item.serving_description}</option>)}
+          </select>
+          <small className={this.state.smallClass}>{this.state.added}</small>
         </div>
         <div className="offset-md-4 col-md-4">
-                        <button type="submit" className="btn btn-primary">Add</button>
-          </div>
+            <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Add</button>
+        </div>
         </form>
       </div>
     )

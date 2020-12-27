@@ -1,4 +1,6 @@
 import React, {Component} from "react"
+import { LoginContext } from "./LoginContext";
+import {withRouter} from "react-router-dom"
 
 class Home extends Component
 {
@@ -14,16 +16,27 @@ class Home extends Component
         .then(data => this.setState(data))
     }
 
+    componentDidMount()
+    {
+        const {loggedIn} = this.context
+
+        if (!loggedIn)
+        {
+            this.setState({})
+            this.props.history.push("/")
+        }
+    }
+
     render()
     {
         return (
             <div className="offset-lg-4 col-lg-4">
-                <br />
-                <p>Hello, {this.state.firstname}!</p>
+                Home
                 
             </div>
         )
     }
 }
 
-export default Home
+Home.contextType = LoginContext
+export default withRouter(Home);

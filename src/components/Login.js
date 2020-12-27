@@ -41,11 +41,11 @@ class Login extends Component
         .then(data => {
             if (!data.username && data.message.success === false)
             {
-                this.setState({failed: true, errorMessage: data.message.message})
+                this.setState({errorMessage: data.message.message})
             }
             else
             {
-                toggleLogin(true)
+                toggleLogin()
                 this.props.history.push("/add")
             } 
     })
@@ -69,7 +69,7 @@ class Login extends Component
                     <div className="form-group col-md-4 offset-md-4">
                         <label htmlFor="password">Password</label>
                         <input type="password" className="form-control" id="password" name="password" onChange={this.handleChange}/>
-                        <small className="form-text text-danger" visibility={this.state.failed ? "visible" : "hidden"}>{this.state.errorMessage}</small>
+                        <small className="form-text text-danger">{this.state.errorMessage}</small>
                     </div>
                     </div>
                     <div className="offset-md-4 col-md-4">

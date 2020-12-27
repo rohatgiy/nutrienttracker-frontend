@@ -8,18 +8,50 @@ import Navbar from "./components/Navbar"
 
 class App extends Component
 {
-  toggleLogin = loggedIn =>
+  toggleLogin = () =>
   {
-    this.setState({loggedIn: loggedIn})
+    localStorage.setItem("loggedStatus", true)
+    this.setState({loggedIn: true})
   }
+
+  toggleLogout = () => 
+  {
+    fetch('http://localhost:5000/logout/',
+    {
+      method: "GET",
+      credentials: "include"
+    })
+    this.setState({loggedIn: false})
+    localStorage.setItem("loggedStatus", false)
+  }
+
   constructor()
   {
     super()
+    let temp = null;
+    if (localStorage.getItem("loggedStatus") === "false")
+    {
+      temp = false
+    }
+    else if (localStorage.getItem("loggedStatus") === "true")
+    {
+      temp = true
+    }
     this.state = {
-      loggedIn: false,
-      toggleLogin: this.toggleLogin
+      loggedIn: temp,
+      toggleLogin: this.toggleLogin,
+      toggleLogout: this.toggleLogout
     }
   }
+
+  componentDidUpdate(prevProps, prevState)
+  {
+    if (this.state.loggedIn !== prevState.loggedIn)
+    {
+      localStorage.setItem("loggedStatus", this.state.loggedIn)
+    } 
+  }
+
   render ()
   {
     return (
@@ -31,6 +63,5 @@ class App extends Component
     )
   }
 }
-
 
 export default App;

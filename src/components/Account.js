@@ -1,10 +1,14 @@
 import React, {Component} from "react"
+import { withRouter } from "react-router-dom"
+import {LoginContext} from "./LoginContext"
 
 class Account extends Component
 {
-    constructor()
+    constructor(props)
     {
-        super()
+        super(props)
+       
+
         this.state = {}
         fetch("/editacc/", {
             method: "GET",
@@ -12,10 +16,20 @@ class Account extends Component
         })
         .then(response => response.json())
         .then(data => this.setState(data))
-
+        
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleChange = this.handleChange.bind(this)
         
+    }
+
+    componentDidMount()
+    {
+        const {loggedIn} = this.context
+
+        if (!loggedIn)
+        {
+            this.props.history.push("/")
+        }
     }
 
     handleSubmit(e) {
@@ -86,4 +100,5 @@ class Account extends Component
     }
 }
 
-export default Account
+Account.contextType = LoginContext
+export default withRouter(Account)
