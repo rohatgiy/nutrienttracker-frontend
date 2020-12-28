@@ -13,6 +13,7 @@ import Dashboard from "./Dashboard"
 import Register from "./Register"
 import Login from "./Login"
 import Account from "./Account"
+import logo from "../nutrient_tracker.png"
 
 class Navbar extends Component
 {
@@ -32,15 +33,28 @@ class Navbar extends Component
       return (
         <Router>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link className="navbar-brand" to="/">Nutrient Tracker</Link>
+            <LoginContext.Consumer>
+              {
+                context => 
+                {
+                    return context.loggedIn ? 
+                    (<Link className="navbar-brand" to="/dashboard">
+                        <img src={logo} alt="logo" height="22px" style={{padding: 0, marginRight: "5px", verticalAlign: "text-top"}}/>
+                        nütrient
+                      </Link>):
+                    (<Link className="navbar-brand" to="/">
+                        <img src={logo} alt="logo" height="22px" style={{padding: 0, marginRight: "5px", verticalAlign: "text-top"}}/>
+                        nütrient
+                    </Link>)
+                }
+              }
+              
+            </LoginContext.Consumer>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
 
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                
-            
-              
               <LoginContext.Consumer>
                 {
                   context => 
@@ -51,7 +65,7 @@ class Navbar extends Component
                           <Link className="nav-link" to="/add">Add</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                            <Link className="nav-link" to="/dashboard">Today</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/history">History</Link>

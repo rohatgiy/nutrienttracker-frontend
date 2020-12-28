@@ -9,7 +9,9 @@ class Add extends Component
     constructor(props)
     {
         super(props)
-        this.state = {}
+        this.state = {
+            name: ""
+        }
 
         fetch("/add/", {
             method: "GET",
@@ -35,7 +37,7 @@ class Add extends Component
             <div>
                 <br/>
                <div className="form-group col-md-4 offset-md-4">
-                   <h5>Add a food:</h5>
+                   <h2>Add a food:</h2>
                 </div>
                 <Search data={foodData}/>
                 

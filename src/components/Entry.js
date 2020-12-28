@@ -23,23 +23,27 @@ class Entry extends Component
 
     render ()
     {
-        return !this.props.empty ? (
-            <div style={{margin: "10px"}}>
-                <div className="offset-md-4 col-md-4">
-                    <br />
-                    <h2>Today, you ate:</h2>   
-                </div>
-                <br/>
-                <div className="card offset-md-2 col-md-8">
+        return this.props.delete ? (
+            !this.props.empty ? (
+                <div className="card offset-md-2 col-md-8" style={{marginBottom: "10px", marginTop: "10px"}}>
                     <div className="card-body">
                         <h4 className="card-title">{this.props.date.toString().substring(0, 10)}</h4>
                         <div className="row">
                             <div className="col-4">
-                                <h5 className="text-muted">Foods:</h5>
-                                {this.props.food_names.map((item, index) => <FoodItem name={item} index={index} rerenderParentCallback={this.props.rerenderParentCallback}/>)}
+                                <div>
+                                    <h5 className="text-muted" style={{marginBottom: 0}}>Foods:</h5>
+                                    {this.props.delete ? 
+                                    <small className="text-muted">Click an item below to delete.</small> : 
+                                    <small className="text-muted">A list of foods you've eaten.</small>}
+                                </div>
+                                <br/>
+                                {this.props.food_names.map((item, index) => <FoodItem name={item} index={index} delete={this.props.delete} rerenderParentCallback={this.props.rerenderParentCallback}/>)}
                             </div> 
                             <div className="col-8">
-                                <h5 className="text-muted">Nutrients:</h5>
+                            <div>
+                                    <h5 className="text-muted" style={{marginBottom: 0}}>Nutrients:</h5>
+                                    <small className="text-muted">Hover over each graph for more info.</small>
+                                </div>
                                 <div className="row">
                                 {this.props.data.map((item) => 
                                 {
@@ -53,7 +57,7 @@ class Entry extends Component
                                             </RadialBarChart>
                                         </p>
                                         <ReactTooltip />
-                                        <text>{item[0].name}</text>
+                                        <p>{item[0].name}</p>
                                     </div>
                                     )
                                 })}
@@ -62,18 +66,55 @@ class Entry extends Component
                         </div>
                     </div>
                 </div>
-            </div>
         ) : (
-            <div>
-                <div className="offset-md-4 col-md-4">
-                    <br />
-                    <h2>Today, you ate:</h2>
-                    <br />
-                    <p>You haven't eaten anything today!</p>   
-                    <a href="/add">Click to add foods</a>
+            <div className="offset-md-2 col-md-4">
+                <br />
+                <p>You haven't eaten anything today!</p>   
+                <a href="/add">Click to add foods</a>
+            </div>
+        )) : ( !this.props.empty ? (
+            <div className="card offset-md-2 col-md-8" style={{marginBottom: "10px", marginTop: "10px"}}>
+                <div className="card-body">
+                    <h4 className="card-title">{this.props.date.toString().substring(0, 10)}</h4>
+                    <div className="row">
+                        <div className="col-4">
+                            <div>
+                                <h5 className="text-muted" style={{marginBottom: 0}}>Foods:</h5>
+                                {this.props.delete ? 
+                                <small className="text-muted">Click an item below to delete.</small> : 
+                                <small className="text-muted">A list of foods you've eaten.</small>}
+                            </div>
+                            <br/>
+                            {this.props.food_names.map((item, index) => <FoodItem name={item} index={index} delete={this.props.delete} rerenderParentCallback={this.props.rerenderParentCallback}/>)}
+                        </div> 
+                        <div className="col-8">
+                        <div>
+                                <h5 className="text-muted" style={{marginBottom: 0}}>Nutrients:</h5>
+                                <small className="text-muted">Hover over each graph for more info.</small>
+                            </div>
+                            <div className="row">
+                            {this.props.data.map((item) => 
+                            {
+                                return (
+                                <div style={{textAlign: "center", margin: "5px", width: "100px"}}>
+                                    
+                                    <p data-tip={`${(item[0].dec*100).toFixed(2)}% of daily requirements; ${item[0].num} ${item[0].unit} / ${item[0].den} ${item[0].unit}`}>
+                                        <RadialBarChart width={100} height={100} cx={50} cy={50} innerRadius={30} barSize={30} data={item}>
+                                            <PolarAngleAxis type="number" domain={[0, 1]} angleAxisId={0} tick={false} />
+                                            <RadialBar background dataKey="dec" angleAxisId={0} clockWise={true}/>
+                                        </RadialBarChart>
+                                    </p>
+                                    <ReactTooltip />
+                                    <p>{item[0].name}</p>
+                                </div>
+                                )
+                            })}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        )
+    ): null)
     }
 }
 
