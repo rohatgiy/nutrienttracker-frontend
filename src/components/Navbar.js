@@ -38,7 +38,7 @@ class Navbar extends Component
                 context => 
                 {
                     return context.loggedIn ? 
-                    (<Link className="navbar-brand" to="/dashboard">
+                    (<Link className="navbar-brand" to="/today">
                         <img src={logo} alt="logo" height="22px" style={{padding: 0, marginRight: "5px", verticalAlign: "text-top"}}/>
                         nütrient
                       </Link>):
@@ -65,7 +65,7 @@ class Navbar extends Component
                           <Link className="nav-link" to="/add">Add</Link>
                         </li>
                         <li className="nav-item">
-                            <Link className="nav-link" to="/dashboard">Today</Link>
+                            <Link className="nav-link" to="/today">Today</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/history">History</Link>
@@ -113,7 +113,7 @@ class Navbar extends Component
           <Route path="/add">
             <Add />
           </Route>
-          <Route path="/dashboard">
+          <Route path="/today">
             <Dashboard />
           </Route>
           <Route path="/register">

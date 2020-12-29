@@ -157,7 +157,7 @@ class History extends Component {
                         <div className="offset-md-2 col-md-4">
                             <br />
                             <p>No history.</p>
-                            <a href="/dashboard">Click to see today's entry</a>  
+                            <a href="/today">Click to see today's entry</a>  
                         </div>
                     )}
             </div>

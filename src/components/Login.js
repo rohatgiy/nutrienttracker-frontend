@@ -56,7 +56,7 @@ class Login extends Component
             else
             {
                 toggleLogin()
-                this.props.history.push("/dashboard")
+                this.props.history.push("/today")
             } 
     })
         
