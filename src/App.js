@@ -16,9 +16,9 @@ class App extends Component
 
   toggleLogout = () => 
   {
-    fetch('http://localhost:5000/logout/',
+    fetch('/api/logout/',
     {
-      method: "GET",
+      method: "POST",
       credentials: "include"
     })
     this.setState({loggedIn: false})

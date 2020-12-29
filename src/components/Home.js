@@ -10,8 +10,8 @@ class Home extends Component
     {
         super();
         this.state = {}
-        fetch("http://localhost:5000/", {
-            method: "GET",
+        fetch("/api/user", {
+            method: "POST",
             credentials: "include"
         })
         .then(response => response.json())
@@ -26,6 +26,10 @@ class Home extends Component
         {
             this.setState({})
             this.props.history.push("/")
+        }
+        else
+        {
+            this.props.history.push("/today")
         }
     }
 

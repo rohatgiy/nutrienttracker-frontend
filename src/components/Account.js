@@ -10,8 +10,8 @@ class Account extends Component
        
 
         this.state = {}
-        fetch("/editacc/", {
-            method: "GET",
+        fetch("/api/user", {
+            method: "POST",
             credentials: "include"
         })
         .then(response => response.json())
@@ -35,7 +35,7 @@ class Account extends Component
     handleSubmit(e) {
         e.preventDefault()
         const data = this.state
-        fetch("/editacc/", {
+        fetch("/api/edit/", {
             method: "POST",
             headers:
             {

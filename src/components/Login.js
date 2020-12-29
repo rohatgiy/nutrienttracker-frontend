@@ -46,7 +46,7 @@ class Login extends Component
             body: JSON.stringify(data)
         }
 
-        fetch("/login/", opts)
+        fetch("/api/login/", opts)
         .then(response => response.json())
         .then(data => {
             if (!data.username && data.message.success === false)

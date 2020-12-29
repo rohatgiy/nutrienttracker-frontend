@@ -22,7 +22,7 @@ class Register extends Component {
     handleSubmit(e)
     {
         e.preventDefault()
-        fetch("http://localhost:5000/createacc",
+        fetch("/api/register",
         {
             method: "POST",
             headers:
@@ -33,7 +33,6 @@ class Register extends Component {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             if (data.success)
             {
                 this.props.history.push("/login")

@@ -25,15 +25,20 @@ class Dashboard extends Component
 
     dashboardFetch()
     {
-        fetch("http://localhost:5000/dashboard",
+        fetch("/api/today/",
         {
-            method: "GET",
+            method: "POST",
             credentials: "include"
         })
         .then(response => response.json())
         .then(data => {
-            console.log("i am here")
             const nuts = [];
+
+            if (Object.keys(data).length === 0 && data.constructor === Object)
+            {
+                return
+            }
+
             for (let i = 0; i < data.entry.nutrients.length; ++i)
             {
                 let den = 1;
@@ -81,7 +86,7 @@ class Dashboard extends Component
             return this.setState(data, () => 
             {
                 empty = data.entry.food_names.length === 0
-                console.log("gothere")
+
                 return this.setState({data: nuts, loading: false})
             })
         })

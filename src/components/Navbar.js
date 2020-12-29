@@ -9,7 +9,7 @@ import {LoginContext} from "./LoginContext"
 import History from "./History"
 import Home from "./Home"
 import Add from "./Add"
-import Dashboard from "./Dashboard"
+import Today from "./Today"
 import Register from "./Register"
 import Login from "./Login"
 import Account from "./Account"
@@ -90,7 +90,7 @@ class Navbar extends Component
                       return context.loggedIn ? (
                         <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                          <Link className="nav-link" to="/editacc">Account</Link>
+                          <Link className="nav-link" to="/edit">Account</Link>
                         </li>
                         <li className="nav-item">
                           <Link className="nav-link" to="/" onClick={this.logoutHandler}>Logout</Link>
@@ -104,25 +104,13 @@ class Navbar extends Component
         </nav>
 
         <Switch>
-          <Route path="/history">
-            <History />
-          </Route>
-          <Route path="/editacc">
-            <Account />
-          </Route>
-          <Route path="/add">
-            <Add />
-          </Route>
-          <Route path="/today">
-            <Dashboard />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
+          <Route path="/history" component={History}/>
+          <Route path="/edit" component={Account}/>
+          <Route path="/add" component={Add}/>
+          <Route path="/today" component={Today}/>
+          <Route path="/register" component={Register}/>
           <Route path="/login" component={Login}/>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route path="/" component={Home}/>
         </Switch>
         </Router>
     )

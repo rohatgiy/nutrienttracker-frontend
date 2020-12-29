@@ -13,7 +13,7 @@ class FoodItem extends Component
     handleDelete(e)
     {
         const del_index = parseInt(e.target.id)
-        fetch("http://localhost:5000/edit",
+        fetch("/api/delete",
         {
             method: "POST",
             credentials: "include",

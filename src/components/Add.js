@@ -13,8 +13,8 @@ class Add extends Component
             name: ""
         }
 
-        fetch("/add/", {
-            method: "GET",
+        fetch("/api/user", {
+            method: "POST",
             credentials: "include"
         })
         .then(response => response.json())

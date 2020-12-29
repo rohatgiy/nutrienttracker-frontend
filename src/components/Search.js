@@ -25,7 +25,7 @@ export default class Search extends React.Component {
   {
     e.preventDefault()
     
-    fetch("http://localhost:5000/add/",
+    fetch("/api/add/",
     {
       method: "POST",
       headers:
@@ -46,7 +46,6 @@ export default class Search extends React.Component {
       }
       else
       {
-        console.log("get here")
         this.setState(
         {
           smallClass: "form-text text-success", 

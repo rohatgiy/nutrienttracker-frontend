@@ -26,15 +26,20 @@ class History extends Component {
 
     historyFetch()
     {
-        fetch("http://localhost:5000/history",
+        fetch("/api/history",
         {
-            method: "GET",
+            method: "POST",
             credentials: "include"
         })
         .then(response => response.json())
         .then(data => {
             let datas = []
             let empties = []
+
+            if (Object.keys(data).length === 0 && data.constructor === Object)
+            {
+                return
+            }
             
             if (data.entries.length === 0)
             {
@@ -50,7 +55,6 @@ class History extends Component {
 
             data.entries.map((entry, index) => 
             {
-                console.log("iteration", index, entry)
                 const nuts = [];
                 for (let i = 0; i < entry.nutrients.length; ++i)
                 {
@@ -96,14 +100,12 @@ class History extends Component {
                         )
                     }
                 }
-                console.log("got here 2")
+
                 return this.setState(data, () => 
                 {
                     empty = entry.food_names.length === 0
                     datas.push(nuts)
                     empties.push(empty)
-
-                    console.log("index", index, "entries len", data.entries.length-1)
 
                     return this.setState({
                         datas: datas, 
@@ -113,7 +115,6 @@ class History extends Component {
                 })
             })
         })
-        console.log("got here")
     }
 
     componentDidMount()

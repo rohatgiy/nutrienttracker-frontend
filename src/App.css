@@ -7,3 +7,7 @@
     text-decoration: underline;
     cursor: pointer;
   }
+
+  body{
+    font-family: 'Quicksand', sans-serif;
+  }
